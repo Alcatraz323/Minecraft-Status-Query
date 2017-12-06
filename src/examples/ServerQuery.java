@@ -1,5 +1,6 @@
 package examples;
 import query.*;
+import java.util.*;
 
 public class ServerQuery
 {
@@ -9,19 +10,10 @@ public class ServerQuery
 		String status;
 		
 		//basic status
-		status = query.basicStat().toString();
-		System.out.println(status);
-		
-		//full status
-		status = query.fullStat().toString();
-		System.out.println(status);
-		
-		//getting the result as a json string
-		status = query.basicStat().asJSON();
-		System.out.println(status);
-		
-		//getting full status as a json string
-		status = query.fullStat().asJSON();
-		System.out.println(status);
+		/*ArrayList<String> ars=query.fullStat().getPlayerList();
+		for(String i:ars){
+			System.out.println(i);
+		}*/
+		System.out.println(query.fullStat().asJSON());
 	}
 }

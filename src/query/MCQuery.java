@@ -1,6 +1,7 @@
 package query;
 
 import java.net.*;
+import java.util.*;
 
 /**
  * A class that handles Minecraft Query protocol requests
@@ -12,10 +13,10 @@ public class MCQuery
 	final static byte HANDSHAKE = 9;
 	final static byte STAT = 0;
 	
-	String serverAddress = "localhost";
-	int queryPort = 25565; // the default minecraft query port
+	String serverAddress = "43.248.137.40";
+	int queryPort = 19132; // the default minecraft query port
 	
-	int localPort = 25566; // the local port we're connected to the server on
+	int localPort = 19132; // the local port we're connected to the server on
 	
 	private DatagramSocket socket = null; //prevent socket already bound exception
 	private int token;
@@ -23,7 +24,7 @@ public class MCQuery
 	public MCQuery(){} // for testing, defaults to "localhost:25565"
 	public MCQuery(String address)
 	{
-		this(address, 25565);
+		this(address, 19132);
 	}
 	public MCQuery(String address, int port)
 	{
@@ -185,11 +186,9 @@ public class MCQuery
 	public static void main(String args[])
 	{
 		MCQuery mc = new MCQuery();
-		
-		System.out.println(mc.basicStat().toString());
-		System.out.println(mc.basicStat().asJSON());
-		System.out.println("=====================");
-		System.out.println(mc.fullStat().toString());
-		System.out.println(mc.fullStat().asJSON());
+		ArrayList<String> a=mc.fullStat().getPlayerList();
+		for(String i:a){
+			System.out.println(i);
+		}
 	}
 }

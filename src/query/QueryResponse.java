@@ -14,7 +14,8 @@ public class QueryResponse
 	private int onlinePlayers, maxPlayers;
 	private short port;
 	private String hostname;
-	
+	private String whitelist;
+	private String server_engine;
 	//for full stat only
 	private String gameID;
 	private String version;
@@ -41,18 +42,30 @@ public class QueryResponse
 		}
 		else //full stat
 		{
+			/*System.out.println(temp.length);
+			int instance=0;
+			for(byte[] i:temp){
+				System.out.println(instance);
+				instance++;
+				try{
+					System.out.println(new String(i));
+				}catch(Exception e){
+					
+				}
+			}*/
 			motd			= new String(temp[3]);
 			gameMode		= new String(temp[5]);
-			mapName			= new String(temp[13]);
-			onlinePlayers	= Integer.parseInt(new String(temp[15]));
-			maxPlayers		= Integer.parseInt(new String(temp[17]));
-			port			= Short.parseShort(new String(temp[19]));
-			hostname		= new String(temp[21]);
-			
+			mapName			= new String(temp[15]);
+			onlinePlayers	= Integer.parseInt(new String(temp[17]));
+			maxPlayers		= Integer.parseInt(new String(temp[19]));
+			port			= Short.parseShort(new String(temp[25]));
+			hostname		= new String(temp[23]);
+			server_engine   = new String(temp[11]);
+			whitelist       = new String(temp[21]);
 			//only available with full stat:
 			gameID = new String(temp[7]);
 			version = new String(temp[9]);
-			plugins = new String(temp[11]);
+			plugins = new String(temp[13]);
 			
 			playerList = new ArrayList<String>();
 			for(int i=25; i<temp.length; i++)
@@ -175,12 +188,31 @@ public class QueryResponse
 	{
 		return motd;
 	}
-	
+	public String gameID(){
+		return gameID;
+	}
 	public String getGameMode()
 	{
 		return gameMode;
 	}
-
+	public String getVersion(){
+		return version;
+	}
+	public short getPort(){
+		return port;
+	}
+	public String getHostname(){
+		return hostname;
+	}
+	public String getWhiteListStatus(){
+		return whitelist;
+	}
+	public String getServerEngine(){
+		return server_engine;
+	}
+	public String getPlugins(){
+		return plugins;
+	}
 	public String getMapName()
 	{
 		return mapName;
